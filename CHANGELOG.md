@@ -6,6 +6,16 @@ O formato segue [Conventional Commits](https://www.conventionalcommits.org/pt-br
 
 ---
 
+## [1.1.0] - 2025-04-27
+
+### ✨ Features
+
+- Criação de camada de serviço (`userService.js`) para centralizar chamadas à API.
+- Implementação de `client.js` com configuração base do Axios.
+- Adicionado uso de variáveis de ambiente via arquivo `.env` para URLs da API.
+
+---
+
 ## [1.0.0] - 2025-04-27
 
 ### ✨ Features
