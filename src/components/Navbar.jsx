@@ -5,13 +5,7 @@ export default function NavBar({ onOpen }) {
         <a className="btn btn-ghost text-xl">Usuários</a>
       </div>
       <div className="navbar-center">
-        <div className="form-control">
-          <input
-            type="text"
-            placeholder="Search"
-            className=" input input-bordered w-48 md:w-auto"
-          />
-        </div>
+        <h1>Teste fullstack</h1>
       </div>
       <div className="navbar-end">
         <button onClick={onOpen} className="btn btn-primary">

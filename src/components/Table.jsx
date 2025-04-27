@@ -1,25 +1,4 @@
-export default function Table({ onOpen }) {
-  const data = [
-    {
-      id: 1,
-      name: "p",
-      email: "helloworld1@gmail.com",
-      active: true,
-    },
-    {
-      id: 2,
-      name: "Hart Hagerty",
-      email: "helloworld1@gmail.com",
-      active: false,
-    },
-    {
-      id: 3,
-      name: "Brice Swyre",
-      email: "helloworld1@gmail.com",
-      active: false,
-    },
-  ];
-
+export default function Table({ users, onOpen }) {
   return (
     <div className="overflow-x-auto mt-10">
       <table className="table">
@@ -34,7 +13,7 @@ export default function Table({ onOpen }) {
           </tr>
         </thead>
         <tbody className="hover">
-          {data.map((item) => (
+          {users.map((item) => (
             <tr key={item.id} className="hover">
               <th></th>
               <td>{item.name}</td>
