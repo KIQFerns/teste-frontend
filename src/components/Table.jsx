@@ -1,4 +1,4 @@
-import axios from "axios";
+import { deleteUser } from "../services/userService";
 
 export default function Table({ users, handleOpen, setUsers }) {
   const handleDelete = async (id) => {
@@ -7,7 +7,7 @@ export default function Table({ users, handleOpen, setUsers }) {
     );
     if (confirmDelete) {
       try {
-        await axios.delete(`http://localhost:8080/api/users/${id}`);
+        await deleteUser(id);
         setUsers((prevData) => prevData.filter((client) => client.id !== id));
       } catch (error) {
         console.log(error);
