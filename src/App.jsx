@@ -3,7 +3,7 @@ import "./App.css";
 import ModalUsers from "./components/ModalUsers";
 import NavBar from "./components/NavBar";
 import Table from "./components/Table";
-import axios from "axios";
+import { getAllUsers, createUser, updateUser } from "./services/userService";
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,49 +12,32 @@ function App() {
   const [selectedUser, setSelectedUser] = useState(null);
 
   const handleOpen = (type, user) => {
-    console.log(user);
     setSelectedUser(user);
     setModaType(type);
     setIsOpen(true);
   };
 
   const handleSubmit = async (userData) => {
-    if (modalType === "create") {
-      try {
-        const response = await axios.post(
-          "http://localhost:8080/api/users",
-          userData
-        );
-        console.log("Client added:", response.data);
-        fetchUsers();
-      } catch (error) {
-        console.error(error);
-      }
-    } else {
-      try {
-        const response = await axios.put(
-          `http://localhost:8080/api/users/${selectedUser.id}`,
-          userData
-        );
+    try {
+      if (modalType === "create") {
+        const response = await createUser(userData);
+        console.log("User added:", response.data);
+      } else {
+        const response = await updateUser(selectedUser.id, userData);
         console.log("User updated:", response.data);
-        setUsers((prevData) =>
-          prevData.map((client) =>
-            client.id === userData.id ? response.data : client
-          )
-        );
-        fetchUsers();
-      } catch (error) {
-        console.error(error);
       }
+      fetchUsers();
+    } catch (error) {
+      console.error("Erro ao salvar usuário:", error);
     }
   };
 
   const fetchUsers = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/api/users");
+      const response = await getAllUsers();
       setUsers(response.data);
     } catch (error) {
-      console.log(error);
+      console.error("Erro ao buscar usuários:", error);
     }
   };
 
