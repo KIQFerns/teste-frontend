@@ -65,7 +65,7 @@ function App() {
   return (
     <>
       <NavBar onOpen={() => handleOpen("create")} />
-      <Table users={users} handleOpen={handleOpen} />
+      <Table users={users} handleOpen={handleOpen} setUsers={setUsers} />
       <ModalUsers
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}

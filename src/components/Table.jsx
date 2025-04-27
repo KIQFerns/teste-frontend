@@ -1,4 +1,20 @@
-export default function Table({ users, handleOpen }) {
+import axios from "axios";
+
+export default function Table({ users, handleOpen, setUsers }) {
+  const handleDelete = async (id) => {
+    const confirmDelete = window.confirm(
+      "Você deseja realmente excluir esse usuário?"
+    );
+    if (confirmDelete) {
+      try {
+        await axios.delete(`http://localhost:8080/api/users/${id}`);
+        setUsers((prevData) => prevData.filter((client) => client.id !== id));
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+
   return (
     <div className="overflow-x-auto mt-10">
       <table className="table">
@@ -28,7 +44,12 @@ export default function Table({ users, handleOpen }) {
                 </button>
               </td>
               <td>
-                <button className="btn btn-secondary">Delete</button>
+                <button
+                  className="btn btn-secondary"
+                  onClick={() => handleDelete(user.id)}
+                >
+                  Delete
+                </button>
               </td>
             </tr>
           ))}
