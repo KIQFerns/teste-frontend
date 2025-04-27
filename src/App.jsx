@@ -15,7 +15,24 @@ function App() {
     setIsOpen(true);
   };
 
-  const fetchClients = async () => {
+  const handleSubmit = async (userData) => {
+    if (modalType === "create") {
+      try {
+        const response = await axios.post(
+          "http://localhost:8080/api/users",
+          userData
+        );
+        console.log("Client added:", response.data);
+        fetchUsers();
+      } catch (error) {
+        console.error("Error adding client:", error);
+      }
+    } else {
+      console.log("Updating client");
+    }
+  };
+
+  const fetchUsers = async () => {
     try {
       const response = await axios.get("http://localhost:8080/api/users");
       setUsers(response.data);
@@ -25,7 +42,7 @@ function App() {
   };
 
   useEffect(() => {
-    fetchClients();
+    fetchUsers();
   }, []);
 
   return (
@@ -35,7 +52,8 @@ function App() {
       <ModalUsers
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
-        mode={modalType}
+        type={modalType}
+        onSubmit={handleSubmit}
       />
     </>
   );
