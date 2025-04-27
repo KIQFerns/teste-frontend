@@ -1,4 +1,4 @@
-export default function Table({ users, onOpen }) {
+export default function Table({ users, handleOpen }) {
   return (
     <div className="overflow-x-auto mt-10">
       <table className="table">
@@ -13,14 +13,17 @@ export default function Table({ users, onOpen }) {
           </tr>
         </thead>
         <tbody className="hover">
-          {users.map((item) => (
-            <tr key={item.id} className="hover">
+          {users.map((user) => (
+            <tr key={user.id} className="hover">
               <th></th>
-              <td>{item.name}</td>
-              <td>{item.email}</td>
-              <td>{item.active ? "Active" : "Inactive"}</td>
+              <td>{user.name}</td>
+              <td>{user.email}</td>
+              <td>{user.active ? "Active" : "Inactive"}</td>
               <td>
-                <button className="btn btn-primary " onClick={onOpen}>
+                <button
+                  className="btn btn-primary "
+                  onClick={() => handleOpen("update", user)}
+                >
                   Update
                 </button>
               </td>

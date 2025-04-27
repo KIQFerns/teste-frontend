@@ -9,8 +9,11 @@ function App() {
   const [isOpen, setIsOpen] = useState(false);
   const [modalType, setModaType] = useState("create");
   const [users, setUsers] = useState([]);
+  const [selectedUser, setSelectedUser] = useState(null);
 
-  const handleOpen = (type) => {
+  const handleOpen = (type, user) => {
+    console.log(user);
+    setSelectedUser(user);
     setModaType(type);
     setIsOpen(true);
   };
@@ -25,10 +28,24 @@ function App() {
         console.log("Client added:", response.data);
         fetchUsers();
       } catch (error) {
-        console.error("Error adding client:", error);
+        console.error(error);
       }
     } else {
-      console.log("Updating client");
+      try {
+        const response = await axios.put(
+          `http://localhost:8080/api/users/${selectedUser.id}`,
+          userData
+        );
+        console.log("User updated:", response.data);
+        setUsers((prevData) =>
+          prevData.map((client) =>
+            client.id === userData.id ? response.data : client
+          )
+        );
+        fetchUsers();
+      } catch (error) {
+        console.error(error);
+      }
     }
   };
 
@@ -48,12 +65,13 @@ function App() {
   return (
     <>
       <NavBar onOpen={() => handleOpen("create")} />
-      <Table users={users} onOpen={() => handleOpen("update")} />
+      <Table users={users} handleOpen={handleOpen} />
       <ModalUsers
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
         type={modalType}
         onSubmit={handleSubmit}
+        userData={selectedUser}
       />
     </>
   );

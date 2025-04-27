@@ -1,6 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-export default function ModalUsers({ isOpen, onClose, type, onSubmit }) {
+export default function ModalUsers({
+  isOpen,
+  onClose,
+  type,
+  onSubmit,
+  userData,
+}) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
 
@@ -15,9 +21,19 @@ export default function ModalUsers({ isOpen, onClose, type, onSubmit }) {
     }
   };
 
+  useEffect(() => {
+    if (type === "update" && userData) {
+      setName(userData.name);
+      setEmail(userData.email);
+    } else {
+      setName("");
+      setEmail("");
+    }
+  }, [type, userData]);
+
   return (
     <>
-      <dialog id="my_modal_3" className="modal bg-black/40" open={isOpen}>
+      <dialog className="modal bg-black/40" open={isOpen}>
         <div className="modal-box">
           <button
             className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
