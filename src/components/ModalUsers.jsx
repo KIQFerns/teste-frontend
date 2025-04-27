@@ -15,7 +15,7 @@ export default function ModalUsers({ isOpen, onClose, mode, onSubmit }) {
             ✕
           </button>
           <h3 className="font-bold text-lg py-4">
-            {mode === "edit" ? "Edit User" : "User Details"}
+            {mode === "update" ? "Editar Usuário" : "Criar usuário"}
           </h3>
 
           <form

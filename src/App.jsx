@@ -6,16 +6,22 @@ import Table from "./components/Table";
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
+  const [modalType, setModaType] = useState("create");
 
-  const handleOpen = () => {
+  const handleOpen = (type) => {
+    setModaType(type);
     setIsOpen(true);
   };
 
   return (
     <>
-      <NavBar onOpen={() => handleOpen()} />
-      <Table />
-      <ModalUsers isOpen={isOpen} onClose={() => setIsOpen(false)} />
+      <NavBar onOpen={() => handleOpen("create")} />
+      <Table onOpen={() => handleOpen("update")} />
+      <ModalUsers
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+        mode={modalType}
+      />
     </>
   );
 }
