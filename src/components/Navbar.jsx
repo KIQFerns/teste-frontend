@@ -2,14 +2,10 @@ export default function Navbar() {
   return (
     <div className="navbar bg-base-100">
       <div className="navbar-start">
-        {/* -- drop down <div></div> */}
-        {/* ++ logo */}
-        <a className="btn btn-ghost text-xl">ClientManager</a>
-        {/* ++ search input */}
+        <a className="btn btn-ghost text-xl">Usuários</a>
       </div>
       <div className="navbar-center">
         <div className="form-control">
-          {/* w-48 */}
           <input
             type="text"
             placeholder="Search"
@@ -18,9 +14,6 @@ export default function Navbar() {
         </div>
       </div>
       <div className="navbar-end">
-        {/* -- svg burrnos divs */}
-        {/* ++ add modal on clcik button  */}
-
         <button className="btn btn-primary">Add Client</button>
       </div>
     </div>
