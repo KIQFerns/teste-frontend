@@ -2,7 +2,14 @@
 
 Todas as mudanças importantes neste projeto serão documentadas aqui.
 
-O formato segue [Conventional Commits](https://www.conventionalcommits.org/pt-br/v1.0.0/).
+## O formato segue [Conventional Commits](https://www.conventionalcommits.org/pt-br/v1.0.0/).
+
+## [1.2.0] - 2025-04-27
+
+### ✨ Features
+
+- Cria um Contexto para exibição de mensagens.
+- Melhoria de UI nos componentes.
 
 ---
 
