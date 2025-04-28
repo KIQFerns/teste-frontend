@@ -19,7 +19,6 @@ export default function ModalUsers({
   };
 
   useEffect(() => {
-    console.log(type);
     if (type === "update" && userData) {
       setName(userData.name);
       setEmail(userData.email);
@@ -29,7 +28,7 @@ export default function ModalUsers({
       setEmail("");
       setActive(true);
     }
-  }, [type, userData]);
+  }, [type, userData, isOpen]);
 
   return (
     <dialog className="modal bg-black/40" open={isOpen}>
