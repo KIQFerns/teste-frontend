@@ -26,7 +26,10 @@ export default function Table({ users, handleOpen, setUsers }) {
           prevData.filter((user) => user.id !== userToDelete.id)
         );
       } catch (error) {
-        showError("Erro ao excluir o usuário. Tente novamente!");
+        const errorMessage =
+          error.response?.data?.message ||
+          "Erro ao excluir o usuário. Tente novamente!";
+        showError(errorMessage);
         console.error(error);
       }
     }

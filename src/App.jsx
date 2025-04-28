@@ -22,23 +22,25 @@ function App() {
   const handleSubmit = async (userData) => {
     if (modalType === "create") {
       try {
-        const response = await createUser(userData);
+        await createUser(userData);
         fetchUsers();
-        console.log("User added:", response.data);
         showSuccess("Usuário criado com sucesso!");
       } catch (error) {
-        console.error("Erro ao salvar usuário:", error);
-        showError("Ocorreu um erro ao salvar o usuário!");
+        const errorMessage =
+          error.response?.data?.message ||
+          "Ocorreu um erro ao salvar o usuário!";
+        showError(errorMessage);
       }
     } else {
       try {
-        const response = await updateUser(selectedUser.id, userData);
+        await updateUser(selectedUser.id, userData);
         fetchUsers();
-        console.log("User updated:", response.data);
         showSuccess("Usuário atualizado com sucesso!");
       } catch (error) {
-        console.error("Erro ao salvar usuário:", error);
-        showError("Ocorreu um erro ao salvar o usuário!");
+        const errorMessage =
+          error.response?.data?.message ||
+          "Ocorreu um erro ao salvar o usuário!";
+        showError(errorMessage);
       }
     }
   };
@@ -48,8 +50,10 @@ function App() {
       const response = await getAllUsers();
       setUsers(response.data);
     } catch (error) {
-      console.error("Erro ao buscar usuários:", error);
-      showError("Ocorreu um erro ao buscar os usuários!"); // Exibindo mensagem de erro
+      const errorMessage =
+        error.response?.data?.message ||
+        "Ocorreu um erro ao buscar os usuários!";
+      showError(errorMessage);
     }
   };
 

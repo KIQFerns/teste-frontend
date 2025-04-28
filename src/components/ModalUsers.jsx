@@ -19,6 +19,7 @@ export default function ModalUsers({
   };
 
   useEffect(() => {
+    console.log(type);
     if (type === "update" && userData) {
       setName(userData.name);
       setEmail(userData.email);
